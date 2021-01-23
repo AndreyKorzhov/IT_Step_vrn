@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include "Student.h"
+#include <fstream>
 
 using namespace std;
 
@@ -83,4 +84,51 @@ void InsertStudent(vector<Student>& students)
     temp.isStudy = true;
 
     students.push_back(temp);
+}
+void Export_File(vector<Student>& students) {
+    Student temp;
+    char sexTemp;
+    char facultyTemp;
+    char save;
+
+    cout << "+++ Ввод данных студента +++" << endl;
+    cout << "Введите имя - "; cin >> temp.firstName;
+    cout << "Введите фамилию - "; cin >> temp.lastName;
+    cout << "Введите дату рождения:" << endl;
+    cout << "год - "; cin >> temp.birthDay.year;
+    cout << "месяц - "; cin >> temp.birthDay.month;
+    cout << "день - "; cin >> temp.birthDay.day;
+    cout << "Введите пол (1 - мужской, 2 - женский) - ";
+    cin >> sexTemp;
+    if (sexTemp == '1') {
+        temp.sex = Sex::Male;
+    } else if (sexTemp == '2') {
+        temp.sex = Sex::Female;
+    } else {
+        temp.sex = Sex::Other;
+    }
+    cout << "Введите факультет (1 - РПО, 2 - Дизайн) - ";
+    cin >> facultyTemp;
+    if (facultyTemp == '1') {
+        temp.faculty = Faculty::SoftDev;
+    } else if (facultyTemp == '2') {
+        temp.faculty = Faculty::Design;
+    }
+    cout << "Введите номер группы - "; cin >> temp.group;
+    temp.isStudy = true;
+    cout << "Сохранить (1)" << endl;
+    cin >> save;
+    if (save == '1') {
+        ofstream file_Students("students.csv", ios_base::app);
+        file_Students << temp.firstName << " : "
+                      << temp.lastName << " : "
+                      << temp.birthDay.ToString() << " : "
+                      << temp.firstName << " : "
+                      << SexToString(temp.sex) << " : "
+                      << FacultyToString(temp.faculty) << " : "
+                      << temp.group << " : "
+                      << temp.IsStudyToString() << endl;
+        students.push_back(temp);
+        file_Students.close();
+    }
 }

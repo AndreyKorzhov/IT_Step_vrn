@@ -45,6 +45,7 @@ int main()
             case 5:
                 break;
             case 6:
+                Export_File(students);
                 break;
             case 7:
                 break;
