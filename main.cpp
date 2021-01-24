@@ -23,6 +23,7 @@ int main()
     student.isStudy = false;
 
     vector<Student> students;
+    vector<string> students_im;
 
     int choice;
     bool flagExit = false;
@@ -48,6 +49,7 @@ int main()
                 Export_File(students);
                 break;
             case 7:
+                Import_File(students_im);
                 break;
             case 0:
                 flagExit = true;
